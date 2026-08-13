@@ -39,14 +39,7 @@ jobs:
           path: site
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: site/
+          path: build/build/html/
       - name: Publish to GitHub Pages
         uses: actions/deploy-pages@v5
         id: deployment
-
-# Copyright (c) Ansible Project
-# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
-# SPDX-License-Identifier: GPL-3.0-or-later
-
-# Created with antsibull-docs 2.25.0
-
