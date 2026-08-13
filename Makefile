@@ -19,7 +19,7 @@ docs-reqs:
 		sphinx-ansible-theme>=0.9.0
 
 $(HTML_DIR):
-	sh $(DOCS_BUILD_SCRIPT)
+	bash $(DOCS_BUILD_SCRIPT)
 
 docs-build: $(HTML_DIR)
 
