@@ -37,10 +37,9 @@ jobs:
         with:
           name: site
           path: site
-      - run: ls site
-#      - uses: actions/upload-pages-artifact@v5
-#        with:
-#          path: site/build/build/html/
-#      - name: Publish to GitHub Pages
-#        uses: actions/deploy-pages@v5
-#        id: deployment
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/build/html/
+      - name: Publish to GitHub Pages
+        uses: actions/deploy-pages@v5
+        id: deployment
