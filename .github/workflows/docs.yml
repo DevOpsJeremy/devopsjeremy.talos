@@ -1,0 +1,52 @@
+name: Documentation
+on:
+  push:
+    paths:
+      - meta/**
+      - plugins/**
+      - docs/**
+      - galaxy.yml
+      - README.md
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+      - run: make collection-install docs
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: site
+          path: build/
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/configure-pages@v6
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          name: site
+          path: site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/
+      - name: Publish to GitHub Pages
+        uses: actions/deploy-pages@v5
+        id: deployment
+
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# Created with antsibull-docs 2.25.0
+

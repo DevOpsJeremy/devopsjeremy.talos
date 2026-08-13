@@ -1,3 +1,3 @@
 # Ansible Collection - devopsjeremy.talos
 
-Documentation for the collection.
+A collection for working with [TalOS](https://docs.siderolabs.com/talos).
