@@ -16,7 +16,7 @@ docs-reqs:
 		'antsibull-docs>=2.0.0,<3.0.0' \
 		ansible-pygments \
 		sphinx \
-		sphinx-ansible-theme>=0.9.0
+		'sphinx-ansible-theme>=0.9.0'
 
 $(HTML_DIR):
 	bash $(DOCS_BUILD_SCRIPT)
