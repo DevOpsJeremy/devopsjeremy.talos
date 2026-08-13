@@ -1,0 +1,22 @@
+namespace: devopsjeremy
+name: talos
+
+version: 1.0.0
+readme: README.md
+authors:
+- Jeremy Watkins <devopsjeremy@gmail.com>
+description: A collection for working with TalOS
+
+license:
+- GPL-2.0-or-later
+license_file: ''
+
+tags: []
+dependencies: {}
+
+repository: https://github.com/DevOpsJeremy/devopsjeremy.talos
+documentation: https://devopsjeremy.com/devopsjeremy.talos
+homepage: https://devopsjeremy.com/devopsjeremy.talos
+issues: https://github.com/DevOpsJeremy/devopsjeremy.talos/issues
+
+build_ignore: []
