@@ -95,10 +95,11 @@ def run_module():
 
             # Command specific 
             recover_from=dict(type='str', required=False),
-            recover_skip_hash_check=dict(type='bool', required=False, default=False)
+            recover_skip_hash_check=dict(type='bool', required=False, default=False),
+            cert_fingerprint=dict(type='str', required=False)
         )
     )
-    cmd = 'apply-config'
+    cmd = 'bootstrap'
     cmd_args = {
         '--cert-fingerprint': module.params['cert_fingerprint'],
         '--config-patch': module.params['config_patch'],
@@ -113,7 +114,7 @@ def run_module():
     talosctl = Talosctl(module)
 
     # Run the command with --dry-run to check if the configuration has changed
-    dry_run_result = talosctl.run_command(cmd=cmd, exit=False, **cmd_args)
+    dry_run_result = talosctl.run_command(cmd=cmd, exit=False, include_cmd=True, **cmd_args)
     cmd_args['--dry-run'] = False
 
     # If dry run fails, fail the module
@@ -134,7 +135,7 @@ def run_module():
         module.exit_json(**base_args)
     
     # If there are changes and not in check mode, run apply-config
-    talosctl.run_command(cmd, exit=True, diff=diff, **cmd_args)
+    talosctl.run_command(cmd, exit=True, diff=diff, include_cmd=True, **cmd_args)
 
 def main():
     run_module()
