@@ -10,7 +10,7 @@ class Talosctl():
             return
         self.module.fail_json(rc=test[0], stdout=test[1], stderr=test[2])
     
-    def run_command(self, cmd, exit=True, diff=None, changed=True, **kwargs):
+    def run_command(self, cmd, exit=True, diff=None, changed=True, include_cmd=False, **kwargs):
         self.test()
         cmd_args = ['talosctl', cmd]
         if self.module.params['cluster']:
@@ -36,6 +36,9 @@ class Talosctl():
         if not exit:
             return cmd_result
         result = { 'rc': cmd_result[0], 'stdout': cmd_result[1], 'stderr': cmd_result[2], 'changed': changed }
+        if include_cmd:
+            result['cmd'] = ' '.join(cmd_args)
+
         if diff:
             result['diff'] = diff
         self.module.exit_json(**result)

@@ -71,8 +71,8 @@ message:
 
 import re
 from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.tools.talos.plugins.module_utils.talos import Talosctl
-from ansible_collections.tools.talos.plugins.module_utils.tools import *
+from ansible_collections.devopsjeremy.talos.plugins.module_utils.talos import Talosctl
+from ansible_collections.devopsjeremy.talos.plugins.module_utils.tools import *
 
 def is_changed(output):
     return not bool(re.match(r'No changes\.', output[2].splitlines()[-1]))
