@@ -95,7 +95,7 @@ def run_module():
 
             # Command specific options
             cert_fingerprint=dict(type='list', required=False),
-            config_patch=dict(type='list', required=False),
+            config_patch=dict(type='str', required=False),
             file=dict(type='str', required=True),
             insecure=dict(type='bool', required=False, default=False),
             mode=dict(type='str', required=False, default='auto', choices=['auto', 'interactive', 'no-reboot', 'reboot', 'staged', 'try']),
@@ -118,12 +118,12 @@ def run_module():
     talosctl = Talosctl(module)
 
     # Run the command with --dry-run to check if the configuration has changed
-    dry_run_result = talosctl.run_command(cmd=cmd, exit=False, **cmd_args)
+    dry_run_result = talosctl.run_command(cmd=cmd, exit=False, include_cmd=True, **cmd_args)
     cmd_args['--dry-run'] = False
 
     # If dry run fails, fail the module
     if dry_run_result[0] != 0:
-        module.fail_json(rc=dry_run_result[0], stdout=dry_run_result[1], stderr=dry_run_result[2], msg=dry_run_result[2])
+        module.fail_json(rc=dry_run_result[0], stdout=dry_run_result[1], stderr=dry_run_result[2], msg=dry_run_result) #[2])
 
     base_args = { 'changed': is_changed(dry_run_result) }
     
