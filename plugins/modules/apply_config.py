@@ -123,7 +123,7 @@ def run_module():
 
     # If dry run fails, fail the module
     if dry_run_result[0] != 0:
-        module.fail_json(rc=dry_run_result[0], stdout=dry_run_result[1], stderr=dry_run_result[2], msg=f"{dry_run_result[2], cmd={cmd_args}")
+        module.fail_json(rc=dry_run_result[0], stdout=dry_run_result[1], stderr=dry_run_result[2], msg=f"{dry_run_result[2]}, cmd={cmd_args}")
 
     base_args = { 'changed': is_changed(dry_run_result) }
     
