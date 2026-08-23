@@ -24,7 +24,7 @@ class Talosctl():
         if self.module.params['talosconfig']:
             cmd_args += ['--talosconfig', self.module.params['talosconfig']]
         for key, value in kwargs.items():
-            if not value:
+            if value is None:
                 continue
             if isinstance(value, list):
                 cmd_args += [key] + value
