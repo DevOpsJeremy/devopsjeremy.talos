@@ -24,6 +24,8 @@ class Talosctl():
         if self.module.params['talosconfig']:
             cmd_args += ['--talosconfig', self.module.params['talosconfig']]
         for key, value in kwargs.items():
+            if not value:
+                continue
             if value is None:
                 continue
             if isinstance(value, list):
@@ -32,6 +34,8 @@ class Talosctl():
                 cmd_args += [key]
             else:
                 cmd_args += [key, str(value)]
+        # TODO: Remove
+        self.module.warn(f"Running command: '{' '.join(cmd_args)}'")
         cmd_result = self.module.run_command(cmd_args)
         if not exit:
             return cmd_result

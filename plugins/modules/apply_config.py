@@ -126,18 +126,18 @@ def run_module():
         module.fail_json(rc=dry_run_result[0], stdout=dry_run_result[1], stderr=dry_run_result[2], msg=f"{dry_run_result[2]}, cmd={cmd_args}")
 
     base_args = { 'changed': is_changed(dry_run_result) }
-    
+
     diff = None
     # If currently running in diff mode, add the diff to the output
     if module._diff:
         if base_args['changed']:
             diff = get_diff(dry_run_result)
         base_args['diff'] = diff
-    
+
     # If running in check mode, or if there are no changes, exit
     if module.check_mode or not base_args['changed']:
         module.exit_json(**base_args)
-    
+
     # If there are changes and not in check mode, run apply-config
     talosctl.run_command(cmd, exit=True, diff=diff, **cmd_args)
 
